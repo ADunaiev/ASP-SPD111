@@ -1,0 +1,27 @@
+﻿@model List<ASP_SPD111.Models.HomeWork1.Restoraunt>
+@{
+    ViewData["Title"] = "HomeWork1_Task4";
+}
+<h1>Information about restoraunts</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Назва</th>
+            <th scope="col">Адреса</th>
+            <th scope="col">Кухня</th>
+            <th scope="col">Рейтінг</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var r in Model)
+        {
+            <tr>
+                <td>@r.Name</td>
+                <td>@r.Address</td>
+                <td>@r.KitchenType</td>
+                <td>@r.Rating</td>
+            </tr>
+        }
+    </tbody>
+</table>

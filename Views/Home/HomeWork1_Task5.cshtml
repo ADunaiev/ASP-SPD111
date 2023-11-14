@@ -1,0 +1,27 @@
+﻿@model List<ASP_SPD111.Models.HomeWork1.Country>
+@{
+    ViewData["Title"] = "HomeWork1_Task5";
+}
+<h1>Information about countries</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Capital</th>
+            <th scope="col">Population, mln</th>
+            <th scope="col">Domain</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var c in Model)
+        {
+            <tr>
+                <td>@c.Name</td>
+                <td>@c.Capital</td>
+                <td>@c.Population</td>
+                <td>@c.Domain</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,39 @@
+﻿@model ASP_SPD111.Models.Lesson1.TransferViewModel;
+@{
+    ViewData["Title"] = "Transfer";
+}
+
+<h1 class="display-4">Передача даних. Моделі</h1>
+
+<p>
+    В ASP використовувається дещо не традиційне для MVC розуміння моделей -
+    тут не об'єкти, призначені для трансферу (передачі) даних між контролерами та представленнями.
+    Представлення за замовченням мають властивість "Model", але для ії використання слід зазначити ії 
+    тип даних інструкцією &commat;model на початку представленя.
+    Властивість "Model" є тим параметром, що передається з виклику 
+    <code>return View(model);</code>
+
+</p>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Параметр</th>
+            <th>Значення</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Дата</td>
+            <td>@Model.Date</td>
+        </tr>
+        <tr>
+            <td>Час</td>
+            <td>@Model.Time</td>
+        </tr>
+        <tr>
+            <td>Контролер</td>
+            <td>@Model.ControllerName</td>
+        </tr>
+    </tbody>
+</table>

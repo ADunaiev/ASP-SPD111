@@ -1,0 +1,93 @@
+﻿@model ASP_SPD111.Models.HomeWork1.RandomLatter
+@{
+    ViewData["Title"] = "HomeWork1";
+}
+
+<h1 class="display-4">HomeWork1</h1>
+
+
+<p class="display-5">
+    Task 1
+</p>
+<p>
+    Створіть і запустіть базовий додаток ASP.NET Core, побудований
+    на основі ASP.NET Razor Pages. На вебсторінці виведіть номер
+    поточного дня року.
+</p>
+<p class="display-6">
+    Solution
+</p>
+@{
+    int daysOfYear = DateTime.Now.DayOfYear;
+}
+
+<p>
+    Поточній день року - <b>@daysOfYear</b>.
+
+</p>
+
+
+<p class="display-6">
+    Task 2
+</p>
+<p>
+    Створіть і запустіть базовий додаток ASP.NET Core, побудований
+    на основі ASP.NET Razor Pages. Залежно від випадкового
+    значення, на вебсторінці відобразіть будь-яку літеру з
+    англійського алфавіту.
+</p>
+<p class="display-6">
+    Solution
+</p>
+<p>
+    Випадкова буква - <b>@Model.MyLetter.ToString()</b>
+</p>
+
+
+<p class="display-6">
+    Task 3
+</p>
+<p>
+    Створіть і запустіть базовий додаток ASP.NET Core, побудований
+    на основі ASP.NET Razor Pages. Додайте до базового додатка
+    нову сторінку. Сторінка має відображати інформацію про
+    ресторан. Доступ до сторінки за посиланням у верхньому меню
+    сторінки.
+</p>
+<p class="display-6">
+    Solution
+</p>
+<p>
+    Додав посилання HomeWork1_Task3 у верхньому меню у Dropdown menu HomeWork1.
+</p>
+
+<p class="display-6">
+    Task 4
+</p>
+<p>
+    Додайте до завдання 2 відображений список ресторанів.
+    Використовуйте можливості CSS для форматування списку.
+</p>
+<p class="display-6">
+    Solution
+</p>
+<p>
+    Додав посилання HomeWork1_Task4 у верхньому меню у Dropdown menu HomeWork1.
+</p>
+
+<p class="display-6">
+    Task 5
+</p>
+<p>
+    Створіть і запустіть базовий додаток ASP.NET Core, побудований
+    на основі ASP.NET Razor Pages. Додайте до базового додатка
+    нову сторінку. Сторінка має відображати інформацію про країни.
+    Доступ до сторінки за посиланням у верхньому меню сторінки.
+    Використовуйте можливості CSS для форматування списку.
+</p>
+<p class="display-6">
+    Solution
+</p>
+<p>
+    Додав посилання HomeWork1_Task5 у верхньому меню у Dropdown menu HomeWork1.
+</p>
