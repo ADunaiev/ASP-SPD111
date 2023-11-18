@@ -22,14 +22,19 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Вступ</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Lesson 1</a>
+                            <div class="dropdown-menu">
+                                <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Home" asp-action="Privacy">Вступ</a>
+                                <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Home" asp-action="Razor">Razor</a>
+                                <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Home" asp-action="Transfer">Transfer</a>
+                            </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Razor">Razor</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Transfer">Transfer</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Lesson 2</a>
+                            <div class="dropdown-menu">
+                                <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Home" asp-action="Ioc">Інверсія управління</a>
+                            </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link text-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">HomeWorks</a>

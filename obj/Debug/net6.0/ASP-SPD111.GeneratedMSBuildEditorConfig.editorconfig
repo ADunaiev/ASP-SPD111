@@ -10,6 +10,8 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ASP_SPD111
 build_property.RootNamespace = ASP_SPD111
 build_property.ProjectDir = C:\Users\ADunaev\source\repos\ASP-SPD111\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
@@ -34,6 +36,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/ADunaev/source/repos/ASP-SPD111/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADunaev/source/repos/ASP-SPD111/Views/Home/Ioc.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJb2MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ADunaev/source/repos/ASP-SPD111/Views/Home/Privacy.cshtml]

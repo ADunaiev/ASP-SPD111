@@ -7,5 +7,7 @@ namespace ASP_SPD111.Models.Lesson1
         public DateOnly Date {get;set;}
         public TimeOnly Time { get;set;}
         public string ControllerName { get;set;} = string.Empty;
+
+        public TransferFormModel? FormModel { get;set;}
     }
 }
