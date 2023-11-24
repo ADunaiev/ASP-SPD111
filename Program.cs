@@ -1,4 +1,5 @@
 using ASP_SPD111.Services.Hash;
+using ASP_SPD111.Services.Validation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,7 @@ builder.Services.AddControllersWithViews();
 
 // реєструємо власні сервіси
 builder.Services.AddSingleton<IHashService, Sha1HashService>();
+builder.Services.AddSingleton<IValidationService, MyValidationService>();
 
 builder.Services.AddDistributedMemoryCache();
 

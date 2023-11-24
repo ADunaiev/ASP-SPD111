@@ -1,0 +1,145 @@
+﻿@model ASP_SPD111.Models.HomwORK2.ValidationViewModel
+@{
+    ViewData["Title"] = "HomeWork2";
+}
+<h1 class="display-4">HomeWork 2</h1>
+
+<p>
+    Створити сервіс валідації даних
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">інтерфейс IValidationService</li>
+        <li class="list-group-item">реалізацію MyValidationService</li>
+    </ul>
+</p>
+<p>
+    У рамках сервісу реалізувати методи валідації
+    імені (IsNameValid), телефону та/або E-mail
+    Зареєструвати як Singleton, інжектувати до контролера
+    
+    Додати до форми поле введення телефону та/або E-mail,
+    і доповнити виведення даних щодо вмісту форми
+    повідомленнями про валідність:
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Ім'я: Тестун - валідне</li>
+        <li class="list-group-item">Прізвище: 123 - не валідне</li>
+        <li class="list-group-item">Email:  testun_ukr.net - не валідне</li>
+    </ul>
+ 
+    ** поля різної валідності зробити різним стилем
+</p>
+
+<h2 class="display-6">Solution</h2>
+
+<form asp-action="ProcessValidationForm" method="post">
+    <div class="container">
+        <div class="row justify-content-start">
+
+            <!-- first name -->
+            <div class="mb-3">
+                <div class="input-group">
+                    <span class="input-group-text">First name</span>
+                    <input type="text" aria-label="First name" name="first-name" class="form-control">
+                </div>
+                <div class="form-text">
+                    Your first name must not contain spaces, digits, special characters.
+                </div>
+            </div>
+
+
+            <!-- last name -->
+            <div class="mb-3">
+                <div class="input-group">
+                    <span class="input-group-text">Last name</span>
+                    <input type="text" aria-label="Last name" name="last-name" class="form-control">
+                </div>
+                <div class="form-text">
+                    Your last name must not contain spaces, digits, special characters.
+                </div>
+            </div>
+
+
+            <!-- e-mail -->
+            <div class="mb-3">
+                <div class="input-group">
+                    <span class="input-group-text">E-mail</span>
+                    <input type="email" aria-label="e-mail" name="e-mail" class="form-control">
+                </div>
+                <div class="form-text">
+                    Your e-mail must contain &#64, contain "." and domain 2-4 letters.
+                </div>
+            </div>
+
+            <!-- phone -->
+            <div class="mb-3">
+                <div class="input-group">
+                    <span class="input-group-text">Phone</span>
+                    <input type="tel" aria-label="phone" name="phone" class="form-control">
+                </div>
+                <div class="form-text">
+                    Your phone must be in following format: +38(0XX)XXX-XX-XX
+                </div>
+            </div>
+
+            <!-- button -->
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+
+</form>
+
+@if (Model.ValidationModel?.FirstName != null)
+{
+    <br/>
+    @if (@Model.IsFirstNameValid == true)
+    {
+        <div class="alert alert-success" role="alert">
+            First name @Model.ValidationModel.FirstName is valid      
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            First name @Model.ValidationModel.FirstName is not valid
+        </div>
+    }
+
+    @if(@Model.IsLastNameValid == true)
+    {
+        <div class="alert alert-success" role="alert">
+            Last name @Model.ValidationModel.LastName is valid
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            Last name @Model.ValidationModel.LastName is not valid
+        </div>
+    }
+
+    @if (@Model.IsEmailValid == true)
+    {
+        <div class="alert alert-success" role="alert">
+            Email @Model.ValidationModel.Email is valid
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            Email @Model.ValidationModel.Email is not valid
+        </div>
+    }
+
+    @if (@Model.IsPhoneNumberValid == true)
+    {
+        <div class="alert alert-success" role="alert">
+            Phone @Model.ValidationModel.Phone is valid
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            Phone @Model.ValidationModel.Phone is not valid
+        </div>
+    }
+
+}

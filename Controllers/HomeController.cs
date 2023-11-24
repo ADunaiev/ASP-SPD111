@@ -5,6 +5,8 @@ using System.Diagnostics;
 using ASP_SPD111.Models.Lesson1;
 using ASP_SPD111.Services.Hash;
 using System.Text.Json;
+using ASP_SPD111.Services.Validation;
+using ASP_SPD111.Models.HomwORK2;
 
 namespace ASP_SPD111.Controllers
 {
@@ -12,13 +14,19 @@ namespace ASP_SPD111.Controllers
     {
         // залежність (від служби) заявляється як private readonly поле
         private readonly IHashService _hashService; // DIP - тип залежності це інтерфейс
+        private readonly IValidationService _validationService;
         private readonly ILogger<HomeController> _logger;
 
         // конструктор зааначає необхідні залежності, їх передає - Resolver (Injector)
-        public HomeController(ILogger<HomeController> logger, IHashService hashService)
+        public HomeController(
+            ILogger<HomeController> logger, 
+            IHashService hashService,
+            IValidationService validationService
+            )
         {
             _logger = logger;
             _hashService = hashService;
+            _validationService = validationService;
         }
 
         public IActionResult Index()
@@ -56,6 +64,51 @@ namespace ASP_SPD111.Controllers
 
             return View(countries);
         }
+        public ViewResult HomeWork2()
+        {
+            ValidationModel? validationModel = null;
+
+            if (HttpContext.Session.Keys.Contains("validationModel"))
+            {
+                validationModel = JsonSerializer.Deserialize<ValidationModel>(
+                    HttpContext.Session.GetString("validationModel")!
+                );
+                HttpContext.Session.Remove("validationModel");
+            }
+            else
+            {
+                validationModel = null;
+            }
+
+            ValidationViewModel model = new()
+            {
+                ValidationModel = validationModel,
+                IsFirstNameValid = false,
+            };
+
+            if (validationModel != null)
+            {
+                model.IsFirstNameValid = _validationService.ValidateFirstName(validationModel.FirstName);
+                model.IsLastNameValid = _validationService.ValidateLastName(validationModel.LastName);
+                model.IsEmailValid = _validationService.ValidateEmail(validationModel.Email);
+                model.IsPhoneNumberValid = _validationService.ValidatePhoneNumber(validationModel.Phone);
+            }
+
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult ProcessValidationForm(ValidationModel? validationModel) 
+        {
+            if (validationModel != null)
+            {
+                HttpContext.Session.SetString(
+                    "validationModel",
+                    JsonSerializer.Serialize(validationModel)
+                );
+            }
+
+            return RedirectToAction(nameof(HomeWork2));
+        }
         public ViewResult Transfer()
         {
             TransferFormModel? formModel;
@@ -66,6 +119,7 @@ namespace ASP_SPD111.Controllers
                 formModel = JsonSerializer.Deserialize<TransferFormModel>(
                     HttpContext.Session.GetString("formModel")!
                 );
+
                 HttpContext.Session.Remove("formModel");
             }
             else
