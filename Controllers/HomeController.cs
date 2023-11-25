@@ -7,6 +7,8 @@ using ASP_SPD111.Services.Hash;
 using System.Text.Json;
 using ASP_SPD111.Services.Validation;
 using ASP_SPD111.Models.HomwORK2;
+using ASP_SPD111.Data;
+using ASP_SPD111.Data.Entities;
 
 namespace ASP_SPD111.Controllers
 {
@@ -16,17 +18,20 @@ namespace ASP_SPD111.Controllers
         private readonly IHashService _hashService; // DIP - тип залежності це інтерфейс
         private readonly IValidationService _validationService;
         private readonly ILogger<HomeController> _logger;
+        private readonly DataContext _context;
 
         // конструктор зааначає необхідні залежності, їх передає - Resolver (Injector)
         public HomeController(
-            ILogger<HomeController> logger, 
+            ILogger<HomeController> logger,
             IHashService hashService,
-            IValidationService validationService
+            IValidationService validationService,
+            DataContext context
             )
         {
             _logger = logger;
             _hashService = hashService;
             _validationService = validationService;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -92,12 +97,40 @@ namespace ASP_SPD111.Controllers
                 model.IsLastNameValid = _validationService.ValidateLastName(validationModel.LastName);
                 model.IsEmailValid = _validationService.ValidateEmail(validationModel.Email);
                 model.IsPhoneNumberValid = _validationService.ValidatePhoneNumber(validationModel.Phone);
+                model.Result = "User was not added to database!";
+
+                if (model.IsEmailValid && model.IsPhoneNumberValid && model.IsLastNameValid && model.IsFirstNameValid)
+                {
+                    string result = "User is exists already!";
+
+                    var users = _context.HomeWotkUsers;
+
+                    bool checkIsExist = users.Any(u => u.FirstName == validationModel.FirstName &&
+                                                       u.LastName == validationModel.LastName);
+
+                    if (!checkIsExist)
+                    {
+                        HomeWotkUser newUser = new HomeWotkUser();
+                        newUser.FirstName = validationModel.FirstName;
+                        newUser.LastName = validationModel.LastName;
+                        newUser.Email = validationModel.Email;
+                        newUser.Phone = validationModel.Phone;
+                        newUser.Moment = DateTime.Now;
+
+                        users.Add(newUser);
+                        _context.SaveChanges();
+                        result = "User added successfully!";
+                    }
+
+                    model.Result = result;
+                }
+            
             }
 
             return View(model);
         }
         [HttpPost]
-        public IActionResult ProcessValidationForm(ValidationModel? validationModel) 
+        public IActionResult ProcessValidationForm(ValidationModel? validationModel)
         {
             if (validationModel != null)
             {
@@ -153,16 +186,20 @@ namespace ASP_SPD111.Controllers
 
             return RedirectToAction(nameof(Transfer));
         }
-        public ViewResult Ioc() 
+        public ViewResult Ioc()
         {
             // використовуваємо сервіс 
             ViewData["hash"] = _hashService.HexString("123");
             ViewData["objHash"] = _hashService.GetHashCode();
-            return View(); 
+            return View();
         }
         public ViewResult Db()
         {
-            return View();  
+            return View();
+        }
+        public ViewResult HomeWork3()
+        {
+            return View();
         }
         public IActionResult Razor()
         {

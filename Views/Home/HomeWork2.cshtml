@@ -142,4 +142,17 @@
         </div>
     }
 
+    @if (Model.Result == "User added successfully!")
+    {
+        <div class="alert alert-success" role="alert">
+            @Model.Result
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            @Model.Result
+        </div>
+    }
+
 }
