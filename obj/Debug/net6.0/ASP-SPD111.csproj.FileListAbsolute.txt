@@ -29,3 +29,16 @@ C:\Users\ADunaev\source\repos\ASP-SPD111\obj\Debug\net6.0\ASP-SPD111.pdb
 C:\Users\ADunaev\source\repos\ASP-SPD111\obj\Debug\net6.0\ASP-SPD111.genruntimeconfig.cache
 C:\Users\ADunaev\source\repos\ASP-SPD111\obj\Debug\net6.0\ref\ASP-SPD111.dll
 C:\Users\ADunaev\source\repos\ASP-SPD111\obj\Debug\net6.0\ASP-SPD111.sourcelink.json
+C:\Users\ADunaev\source\repos\ASP-SPD111\bin\Debug\net6.0\Humanizer.dll
+C:\Users\ADunaev\source\repos\ASP-SPD111\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\ADunaev\source\repos\ASP-SPD111\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\ADunaev\source\repos\ASP-SPD111\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\ADunaev\source\repos\ASP-SPD111\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\ADunaev\source\repos\ASP-SPD111\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\ADunaev\source\repos\ASP-SPD111\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\ADunaev\source\repos\ASP-SPD111\bin\Debug\net6.0\MySqlConnector.dll
+C:\Users\ADunaev\source\repos\ASP-SPD111\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\ADunaev\source\repos\ASP-SPD111\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\ADunaev\source\repos\ASP-SPD111\obj\Debug\net6.0\ASP-SPD111.csproj.AssemblyReference.cache
+C:\Users\ADunaev\source\repos\ASP-SPD111\obj\Debug\net6.0\ASP-SPD111.csproj.CopyComplete
+C:\Users\ADunaev\source\repos\ASP-SPD111\bin\Debug\net6.0\dbsettings.json

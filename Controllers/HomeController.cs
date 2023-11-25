@@ -160,6 +160,10 @@ namespace ASP_SPD111.Controllers
             ViewData["objHash"] = _hashService.GetHashCode();
             return View(); 
         }
+        public ViewResult Db()
+        {
+            return View();  
+        }
         public IActionResult Razor()
         {
             ViewData["formController"] = "Hello from Controller";
