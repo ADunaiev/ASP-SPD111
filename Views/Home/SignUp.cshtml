@@ -1,0 +1,96 @@
+﻿@model ASP_SPD111.Models.Lesson4.SignupViewModel
+@{
+    ViewData["Title"] = "Реєстрація";
+}
+
+<h1 class="display-4">Реєстрація нового користувача</h1>
+
+<form method="post" enctype="multipart/form-data" asp-action="SignupForm">
+    <div class="row">
+        <div class="col">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="login-addon"><i class="bi bi-person-down"></i></span>
+              <input type="text" class="form-control" 
+                        placeholder="Логін" aria-label="Логін"
+                        name="signup-login"
+                        aria-describedby="login-addon">
+            </div>
+        </div>
+        <div class="col">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="name-addon"><i class="bi bi-person-badge"></i></span>
+                <input type="text" class="form-control"
+                       placeholder="ПІБ" aria-label="ПІБ"
+                       name="signup-name"
+                       aria-describedby="name-addon">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="email-addon"><i class="bi bi-envelope-at"></i></span>
+                <input type="text" class="form-control"
+                       placeholder="Е-пошта" aria-label="Е-пошта"
+                       name="signup-email"
+                       aria-describedby="email-addon">
+            </div>
+        </div>
+        <div class="col">
+            <div class="input-group mb-3">
+                <label class="input-group-text"
+                       for="inputGroupFile01"><i class="bi bi-person-circle"></i></label>
+                <input type="file" class="form-control"
+                    placeholder="Аватар" aria-label="Аватар"
+                    name="signup-avatar"
+                    id="avatar-input">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="password-addon"><i class="bi bi-pass"></i></span>
+                <input type="password" class="form-control"
+                       placeholder="Пароль" aria-label="Пароль"
+                       name="signup-password"
+                       aria-describedby="password-addon">
+            </div>
+        </div>
+        <div class="col">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="repeat-addon"><i class="bi bi-pass-fill"></i></span>
+                <input type="password" class="form-control"
+                       placeholder="Пароль" aria-label="Пароль"
+                       name="signup-repeat"
+                       aria-describedby="repeat-addon">
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-end">
+        <div class="col-3">
+            <button type="submit" class="btn btn-success">Реєстрація</button>
+        </div>
+
+    </div>
+</form>
+
+@if(Model.FormStatus == true)
+{
+    <div class="alert alert-success" role="alert">
+        Реєстрація пройшла успішно!
+    </div>
+}
+@if (Model.FormStatus == false)
+{
+    <div class="alert alert-danger" role="alert">
+        Виникли помилки реєстрації!
+        @Model.FormValidation?.LoginErrorMessage
+        @Model.FormValidation?.NameErrorMessage
+        @Model.FormValidation?.EmailErrorMessage
+        @Model.FormValidation?.PasswordErrorMessage
+        @Model.FormValidation?.RepeatErrorMessage
+        @Model.FormValidation?.AvatarErrorMessage
+    </div>
+}

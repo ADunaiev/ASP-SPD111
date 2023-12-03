@@ -6,6 +6,7 @@ namespace ASP_SPD111.Data
     {
         public DbSet<Entities.User> Users { get; set; }
         public DbSet<Entities.HomeWotkUser> HomeWotkUsers { get; set; }
+        public DbSet<Entities.LoginJournalItem> LoginJournal { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options) 
         { }

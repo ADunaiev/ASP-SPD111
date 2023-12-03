@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ASP-SPD111.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 </head>
 <body>
     <header>
@@ -43,6 +44,12 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown">
+                            <a class="nav-link text-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Lesson 4</a>
+                            <div class="dropdown-menu">
+                                <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Home" asp-action="SignUp">Робота з користувачами</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
                             <a class="nav-link text-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">HomeWorks</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="HomeWork1" >HomeWork1</a>
@@ -54,6 +61,12 @@
                             </div>  
                         </li>
                     </ul>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-outline-secondary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#authModal">
+                        <i class="bi bi-box-arrow-in-right"></i>                   
+                    </button>
                 </div>
             </div>
         </nav>
@@ -69,6 +82,28 @@
             &copy; 2023 - ASP_SPD111 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="authModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <a asp-action="SignUp" asp-controller="Home" asp-area="" type="button" class="btn btn-info">Реєстрація</a>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
