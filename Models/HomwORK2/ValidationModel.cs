@@ -8,6 +8,8 @@ namespace ASP_SPD111.Models.HomwORK2
         public String FirstName { get; set; } = String.Empty;
         [FromForm(Name = "last-name")]
         public String LastName { get; set; } = String.Empty;
+        [FromForm(Name = "full-name")]
+        public String FullName {  get; set; } = String.Empty;
         [FromForm(Name = "e-mail")]
         public String Email { get; set; } = String.Empty;
         [FromForm(Name = "phone")]

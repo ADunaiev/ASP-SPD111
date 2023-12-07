@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 namespace ASP_SPD111.Services.Validation
 {
@@ -31,7 +32,7 @@ namespace ASP_SPD111.Services.Validation
 
                 MatchCollection matches = rg.Matches(firstName);
 
-                if (matches.Count == 0 ) { return true; }
+                if (matches.Count == 0) { return true; }
             }
 
             return false;
@@ -50,6 +51,39 @@ namespace ASP_SPD111.Services.Validation
                 if (matches.Count == 0) { return true; }
             }
 
+            return false;
+        }
+
+        public bool ValidateFullName(string fullName)
+        {
+            if (fullName != null)
+            {
+                string pattern = @"\b([A-ZА-ЯІЇЄ]{1}[a-zа-яіїє]{1,30}[- ]{0,1}|[A-ZА-ЯІЇЄ]{1}[- \']{1}[A-ZА-ЯІЇЄ]{0,1}  
+                                    [a-zа-яіїє]{1,30}[- ]{0,1}|[a-zа-яіїє]{1,2}[ -\']{1}[A-ZА-ЯІЇЄ]{1}[a-zа-яіїє]{1,30}){2,5}";
+
+                Regex rg = new Regex(pattern);
+
+                MatchCollection matches = rg.Matches(fullName);
+
+                if (matches.Count != 0 && matches[0].Length == fullName.Length)
+                { return true; }
+            }
+            return false;
+        }
+        
+        public bool ValidateLogin(string fullName)
+        {
+            if (fullName != null)
+            {
+                string pattern = @"^[a-zA-Z]{1}[a-zA-Z1-9]{1,9}";
+
+                Regex rg = new Regex(pattern);
+
+                MatchCollection matches = rg.Matches(fullName);
+
+                if (matches.Count != 0 && matches[0].Length == fullName.Length)
+                { return true; }
+            }
             return false;
         }
 

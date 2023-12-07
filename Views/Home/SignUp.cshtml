@@ -10,19 +10,71 @@
         <div class="col">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="login-addon"><i class="bi bi-person-down"></i></span>
-              <input type="text" class="form-control" 
-                        placeholder="Логін" aria-label="Логін"
-                        name="signup-login"
-                        aria-describedby="login-addon">
+                @if(Model.FormValidation?.LoginErrorMessage == null && Model.FormStatus == false)
+                {
+                    <input type="text" class="form-control is-valid"
+                           placeholder="Логін" aria-label="Логін"
+                           name="signup-login"
+                           aria-describedby="login-addon"
+                    value="@Model.FormModel?.Login">
+                    <div class="valid-feedback">
+                        Приймається!
+                    </div>
+                }
+                else if (Model.FormValidation?.LoginErrorMessage != null && Model.FormStatus == false)
+                {
+                    <input type="text" class="form-control is-invalid"
+                           placeholder="Логін" aria-label="Логін"
+                           name="signup-login"
+                           aria-describedby="login-addon"
+                           value="@Model.FormModel?.Login">
+
+                    <div class="invalid-feedback">
+                        @Model.FormValidation.LoginErrorMessage
+                    </div>
+                }
+                else
+                {
+                    <input type="text" class="form-control"
+                           placeholder="Логін" aria-label="Логін"
+                           name="signup-login"
+                           aria-describedby="login-addon"
+                           value="@Model.FormModel?.Login">
+                }
             </div>
         </div>
         <div class="col">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="name-addon"><i class="bi bi-person-badge"></i></span>
-                <input type="text" class="form-control"
-                       placeholder="ПІБ" aria-label="ПІБ"
-                       name="signup-name"
-                       aria-describedby="name-addon">
+                @if (Model.FormValidation?.NameErrorMessage == null && Model.FormStatus == false)
+                {
+                    <input type="text" class="form-control is-valid"
+                           placeholder="ПІБ" aria-label="ПІБ"
+                           name="signup-name"
+                           aria-describedby="name-addon"
+                           value="@Model.FormModel?.Name">
+                    <div class="valid-feedback">
+                        Приймається!
+                    </div>
+                }
+                else if (Model.FormValidation?.NameErrorMessage != null && Model.FormStatus == false)
+                {
+                    <input type="text" class="form-control is-invalid"
+                           placeholder="ПІБ" aria-label="ПІБ"
+                           name="signup-name"
+                           aria-describedby="name-addon"
+                           value="@Model.FormModel?.Name">
+                    <div class="invalid-feedback">
+                        @Model.FormValidation?.NameErrorMessage
+                    </div>
+                }
+                else
+                {
+                    <input type="text" class="form-control"
+                           placeholder="ПІБ" aria-label="ПІБ"
+                           name="signup-name"
+                           aria-describedby="name-addon">
+                }
             </div>
         </div>
     </div>
@@ -30,20 +82,60 @@
         <div class="col">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="email-addon"><i class="bi bi-envelope-at"></i></span>
-                <input type="text" class="form-control"
-                       placeholder="Е-пошта" aria-label="Е-пошта"
-                       name="signup-email"
-                       aria-describedby="email-addon">
+                @if(Model.FormStatus == false && Model.FormValidation?.EmailErrorMessage == null)
+                {
+                    <input type="text" class="form-control is-valid"
+                           placeholder="Е-пошта" aria-label="Е-пошта"
+                           name="signup-email"
+                           aria-describedby="email-addon"
+                           value="@Model.FormModel?.Email">
+                    <div class="valid-feedback">
+                        Приймається!
+                    </div>
+                }
+                else if(Model.FormStatus == false && Model.FormValidation?.EmailErrorMessage != null)
+                {
+                    <input type="text" class="form-control is-invalid"
+                           placeholder="Е-пошта" aria-label="Е-пошта"
+                           name="signup-email"
+                           aria-describedby="email-addon"
+                           value="@Model.FormModel?.Email">
+                    <div class="invalid-feedback">
+                        @Model.FormValidation.EmailErrorMessage
+                    </div>
+                }
+                else
+                {
+                    <input type="text" class="form-control"
+                           placeholder="Е-пошта" aria-label="Е-пошта"
+                           name="signup-email"
+                           aria-describedby="email-addon"
+                           >
+                }
             </div>
         </div>
         <div class="col">
             <div class="input-group mb-3">
                 <label class="input-group-text"
                        for="inputGroupFile01"><i class="bi bi-person-circle"></i></label>
-                <input type="file" class="form-control"
-                    placeholder="Аватар" aria-label="Аватар"
-                    name="signup-avatar"
-                    id="avatar-input">
+                @if(Model.FormStatus == false && Model.FormValidation?.AvatarErrorMessage != null)
+                {
+                    <input type="file" class="form-control is-invalid"
+                           placeholder="Аватар" aria-label="Аватар"
+                           name="signup-avatar"
+                           id="avatar-input"
+                           >
+                    <div class="invalid-feedback">
+                        @Model.FormValidation?.AvatarErrorMessage
+                    </div>
+                }
+                else
+                {
+                    <input type="file" class="form-control"
+                           placeholder="Аватар" aria-label="Аватар"
+                           name="signup-avatar"
+                           id="avatar-input">
+                }
             </div>
         </div>
     </div>
@@ -51,19 +143,46 @@
         <div class="col">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="password-addon"><i class="bi bi-pass"></i></span>
-                <input type="password" class="form-control"
-                       placeholder="Пароль" aria-label="Пароль"
-                       name="signup-password"
-                       aria-describedby="password-addon">
+                @if(Model.FormStatus == false && Model.FormValidation?.PasswordErrorMessage != null)
+                {
+                    <input type="password" class="form-control is-invalid"
+                           placeholder="Пароль" aria-label="Пароль"
+                           name="signup-password"
+                           aria-describedby="password-addon"
+                           >
+                    <div class="invalid-feedback">
+                        @Model.FormValidation.PasswordErrorMessage
+                    </div>
+                }
+                else
+                {
+                    <input type="password" class="form-control"
+                           placeholder="Пароль" aria-label="Пароль"
+                           name="signup-password"
+                           aria-describedby="password-addon">
+                }
             </div>
         </div>
         <div class="col">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="repeat-addon"><i class="bi bi-pass-fill"></i></span>
-                <input type="password" class="form-control"
-                       placeholder="Пароль" aria-label="Пароль"
-                       name="signup-repeat"
-                       aria-describedby="repeat-addon">
+                @if(Model.FormStatus == false && Model.FormValidation?.RepeatErrorMessage != null)
+                {
+                    <input type="password" class="form-control is-invalid"
+                           placeholder="Пароль" aria-label="Пароль"
+                           name="signup-repeat"
+                           aria-describedby="repeat-addon">
+                    <div class="invalid-feedback">
+                        @Model.FormValidation.RepeatErrorMessage
+                    </div>
+                }
+                else
+                {
+                    <input type="password" class="form-control"
+                           placeholder="Пароль" aria-label="Пароль"
+                           name="signup-repeat"
+                           aria-describedby="repeat-addon">
+                }
             </div>
         </div>
     </div>
@@ -76,21 +195,18 @@
     </div>
 </form>
 
+<br/><br/>
+
 @if(Model.FormStatus == true)
 {
     <div class="alert alert-success" role="alert">
-        Реєстрація пройшла успішно!
+        Реєстрація пройшла успішно! 
     </div>
 }
 @if (Model.FormStatus == false)
 {
     <div class="alert alert-danger" role="alert">
         Виникли помилки реєстрації!
-        @Model.FormValidation?.LoginErrorMessage
-        @Model.FormValidation?.NameErrorMessage
-        @Model.FormValidation?.EmailErrorMessage
-        @Model.FormValidation?.PasswordErrorMessage
-        @Model.FormValidation?.RepeatErrorMessage
-        @Model.FormValidation?.AvatarErrorMessage
+
     </div>
 }

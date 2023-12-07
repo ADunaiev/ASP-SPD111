@@ -57,6 +57,17 @@
                 </div>
             </div>
 
+            <!-- full name -->
+            <div class="mb-3">
+                <div class="input-group">
+                    <span class="input-group-text">Full name</span>
+                    <input type="text" aria-label="Full name" name="full-name" class="form-control">
+                </div>
+                <div class="form-text">
+                    Your full name must not contain spaces, digits, special characters.
+                </div>
+            </div>
+
 
             <!-- e-mail -->
             <div class="mb-3">
@@ -113,6 +124,19 @@
     {
         <div class="alert alert-danger" role="alert">
             Last name @Model.ValidationModel.LastName is not valid
+        </div>
+    }
+
+    @if (@Model.IsFullNameValid == true)
+    {
+        <div class="alert alert-success" role="alert">
+            Full name @Model.ValidationModel.FullName is valid
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            Full name @Model.ValidationModel.FullName is not valid
         </div>
     }
 

@@ -96,6 +96,7 @@ namespace ASP_SPD111.Controllers
             {
                 model.IsFirstNameValid = _validationService.ValidateFirstName(validationModel.FirstName);
                 model.IsLastNameValid = _validationService.ValidateLastName(validationModel.LastName);
+                model.IsFullNameValid = _validationService.ValidateFullName(validationModel.FullName);
                 model.IsEmailValid = _validationService.ValidateEmail(validationModel.Email);
                 model.IsPhoneNumberValid = _validationService.ValidatePhoneNumber(validationModel.Phone);
                 model.Result = "User was not added to database!";
@@ -240,9 +241,19 @@ namespace ASP_SPD111.Controllers
                 results.LoginErrorMessage = "Логін не може бути порожним!";
                 isFormValid = false;
             }
+            else if(_validationService.ValidateLogin(model.Login) == false)
+            {
+                results.LoginErrorMessage = "Логін не валідний!";
+                isFormValid = false;
+            }
             if (String.IsNullOrEmpty(model.Name))
             {
                 results.NameErrorMessage = "ПІБ не може бути порожним!";
+                isFormValid = false;
+            }
+            else if(_validationService.ValidateFullName(model.Name) == false)
+            {
+                results.NameErrorMessage = "Повне ім'я не валідне!";
                 isFormValid = false;
             }
             if (String.IsNullOrEmpty(model.Email))
@@ -250,9 +261,19 @@ namespace ASP_SPD111.Controllers
                 results.EmailErrorMessage = "Пошта не може бути порожним!";
                 isFormValid = false;
             }
+            else if(_validationService.ValidateEmail(model.Email) == false)
+            {
+                results.EmailErrorMessage = "Email не валідний!";
+                isFormValid = false;
+            }
             if (String.IsNullOrEmpty(model.Password))
             {
                 results.PasswordErrorMessage = "Пароль не може бути порожним!";
+                isFormValid = false;
+            }
+            else if(model.Password.Length <= 2)
+            {
+                results.PasswordErrorMessage = "Пароль закороткий!";
                 isFormValid = false;
             }
             if (model.Repeat != model.Password)
@@ -274,41 +295,60 @@ namespace ASP_SPD111.Controllers
                 {
                     String ext = model.Avatar.FileName.Substring(dotPosition);
                     // TO DO: додати перевірку розширення на перелік дозволенних
-
-                    // генеруємо випадкове ім'я файлу, зберігаємо розширення
-                    // контролюємо, що такого імені не має у сховищі
-                    String dir = Directory.GetCurrentDirectory();
-
-                    String savedName;
-                    String fileName;
-                    do
+                    List<String> allowedExtansions = new()
                     {
-                        fileName = Guid.NewGuid() + ext;
-                        savedName = Path.Combine(dir, "wwwroot", "avatars", fileName);
+                        ".jpg",
+                        ".png"
+                    };
+                    if (!allowedExtansions.Any(s => s.Equals(ext)))
+                    {
+                        results.AvatarErrorMessage = " Розширення не є допустимим! Дозволені розширення:";
+
+                        foreach(var item in allowedExtansions)
+                        {
+                            results.AvatarErrorMessage += " " + item;
+                        }
+                        results.AvatarErrorMessage += ".";
+
+                        isFormValid = false;
                     }
-                    while (System.IO.File.Exists(savedName));
-
-                    using Stream stream = System.IO.File.OpenWrite(savedName);
-                    model.Avatar.CopyTo(stream);
-
-                    // до цього місця доходимо у разі відсутності помилок валідації
-                    // відповідно додаємо нового користувача до БД
-                    String salt = _hashService.HexString(Guid.NewGuid().ToString());
-                    String dk = _hashService.HexString(salt + model.Password);
-
-                    _context.Users.Add(new()
+                    else
                     {
-                        Id = Guid.NewGuid(),
-                        Login = model.Login,
-                        Name = model.Name,
-                        Avatar = fileName,
-                        RegisterDt = DateTime.Now,
-                        DeleteDt = null,
-                        Email = model.Email,
-                        PasswordSalt = salt,
-                        PasswordDk = dk,
-                    });
-                    _context.SaveChanges();
+                        // генеруємо випадкове ім'я файлу, зберігаємо розширення
+                        // контролюємо, що такого імені не має у сховищі
+                        String dir = Directory.GetCurrentDirectory();
+
+                        String savedName;
+                        String fileName;
+                        do
+                        {
+                            fileName = Guid.NewGuid() + ext;
+                            savedName = Path.Combine(dir, "wwwroot", "avatars", fileName);
+                        }
+                        while (System.IO.File.Exists(savedName));
+
+                        using Stream stream = System.IO.File.OpenWrite(savedName);
+                        model.Avatar.CopyTo(stream);
+
+                        // до цього місця доходимо у разі відсутності помилок валідації
+                        // відповідно додаємо нового користувача до БД
+                        String salt = _hashService.HexString(Guid.NewGuid().ToString());
+                        String dk = _hashService.HexString(salt + model.Password);
+
+                        _context.Users.Add(new()
+                        {
+                            Id = Guid.NewGuid(),
+                            Login = model.Login,
+                            Name = model.Name,
+                            Avatar = fileName,
+                            RegisterDt = DateTime.Now,
+                            DeleteDt = null,
+                            Email = model.Email,
+                            PasswordSalt = salt,
+                            PasswordDk = dk,
+                        });
+                        _context.SaveChanges();
+                    }
                 }
 
             }

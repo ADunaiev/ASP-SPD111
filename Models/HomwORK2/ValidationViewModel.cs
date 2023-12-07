@@ -6,6 +6,7 @@
 
         public bool IsFirstNameValid { get; set; } = false;
         public bool IsLastNameValid { get; set; } = false;
+        public bool IsFullNameValid { get; set; } = false;
         public bool IsEmailValid { get; set;} = false;
         public bool IsPhoneNumberValid { get; set; } = false;
         public String Result { get; set; } = null;
