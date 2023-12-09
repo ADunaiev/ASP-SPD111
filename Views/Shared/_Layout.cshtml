@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -61,12 +62,36 @@
                             </div>  
                         </li>
                     </ul>
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-outline-secondary"
-                            data-bs-toggle="modal"
-                            data-bs-target="#authModal">
-                        <i class="bi bi-box-arrow-in-right"></i>                   
-                    </button>
+                    @* Перевіряємо чи автентифікований користувач, 
+                        виводимо або аватарку, або кнопку входу,
+                        або кнопку входу
+                    *@
+                    @if(Context.User.Identity?.IsAuthenticated ?? false)
+                    {
+                        String avatar = Context.User.Claims
+                            .First(claim => claim.Type == ClaimTypes.UserData)
+                            .Value;
+                        String myName = Context.User.Claims
+                            .First(c => c.Type == ClaimTypes.Name)
+                            .Value;
+                        <span>@(myName) </span>
+                        if (String.IsNullOrEmpty(avatar)) avatar = "no-photo.png";                     
+                        <img src="/Avatars/@(avatar)" class="rounded nav-avatar"/>
+                        <button type="button" class="btn btn-outline-danger"\
+                                id="auth-signout-button">
+                            <i class="bi bi-box-arrow-right"></i>
+                        </button>
+                    }
+                    else
+                    {
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-outline-secondary"
+                                data-bs-toggle="modal"
+                                data-bs-target="#authModal">
+                            <i class="bi bi-box-arrow-in-right"></i>
+                        </button>
+                    }
+
                 </div>
             </div>
         </nav>
@@ -88,10 +113,9 @@
     <!-- Modal -->
     <div class="modal fade bd-example-modal-sm" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
-            <form method="post" enctype="multipart/form-data">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <!-- <h1 class="modal-title fs-5" id="authModalLabel">Modal title</h1>-->
+                        <h5 class="modal-title fs-5" id="authModalLabel">Вхід у систему</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -101,6 +125,7 @@
                                     <span class="input-group-text" id="login-addon"><i class="bi bi-person-down"></i></span>
                                     <input type="text" class="form-control"
                                            placeholder="Логін" aria-label="Логін"
+                                           id="auth-login"
                                            name="signup-login"
                                            aria-describedby="login-addon"
                                            >
@@ -113,6 +138,7 @@
                                     <span class="input-group-text" id="password-addon"><i class="bi bi-pass"></i></span>
                                     <input type="password" class="form-control"
                                            placeholder="Пароль" aria-label="Пароль"
+                                           id="auth-password"
                                            name="signup-password"
                                            aria-describedby="password-addon">
                                 </div>
@@ -120,8 +146,7 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col">
-                                <button type="button" class="btn btn-primary w-100">Увійти</button>
-                                
+                                <button type="button" id="auth-button" class="btn btn-primary w-100">Увійти</button> 
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -129,10 +154,16 @@
                                 <a asp-action="SignUp" asp-controller="Home" asp-area="" type="button" class="btn btn-success w-100">Реєстрація</a>
                             </div>
                         </div>
-                    </div>
-
+                        <div class="row mb-3">
+                            <div class="col">
+                                <div id="auth-message" class="alert alert-danger visually-hidden w-100" role="alert"></div>
+                            </div>
+                        </div>
                 </div>
-            </form>
+                    <div class="modal-footer">
+            
+                    </div>
+                </div>
         </div>
     </div>
 
