@@ -59,6 +59,7 @@
                                 <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="HomeWork1_Task5" >HomeWork1 Task5</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="HomeWork2" >HomeWork2</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="HomeWork3" >HomeWork3</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="HomeWork5" >HomeWork5</a>
                             </div>  
                         </li>
                     </ul>
@@ -75,9 +76,11 @@
                             .First(c => c.Type == ClaimTypes.Name)
                             .Value;
                         <span>@(myName) </span>
-                        if (String.IsNullOrEmpty(avatar)) avatar = "no-photo.png";                     
-                        <img src="/Avatars/@(avatar)" class="rounded nav-avatar"/>
-                        <button type="button" class="btn btn-outline-danger"\
+                        if (String.IsNullOrEmpty(avatar)) avatar = "no-photo.png"; 
+                        <a asp-controller="User" asp-action="Profile">
+                            <img src="/Avatars/@(avatar)" class="rounded nav-avatar"/>
+                        </a>
+                        <button type="button" class="btn btn-outline-danger"
                                 id="auth-signout-button">
                             <i class="bi bi-box-arrow-right"></i>
                         </button>
@@ -87,7 +90,8 @@
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-outline-secondary"
                                 data-bs-toggle="modal"
-                                data-bs-target="#authModal">
+                                data-bs-target="#authModal"
+                                >
                             <i class="bi bi-box-arrow-in-right"></i>
                         </button>
                     }

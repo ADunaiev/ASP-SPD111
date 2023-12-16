@@ -41,6 +41,16 @@ namespace ASP_SPD111.Controllers
 
             return new { status = "Auth Confirmed", login, password };
         }
+
+        [HttpDelete]
+        public RedirectToActionResult SignOutMethod() 
+        {
+
+            HttpContext.Session.Clear();
+
+            return RedirectToAction(nameof(Index));
+
+        }
     }
 }
 /*

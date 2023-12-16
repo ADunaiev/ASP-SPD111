@@ -50,7 +50,7 @@ namespace ASP_SPD111.MiddleWare
 
             // тіло MiddleWare ділиться на дві частини: 
             // прямий хід (до виклику наступної ланки) ...
-            _next(context);
+            await _next(context);
             // та зворотній хід - після виклику.
         }
     }

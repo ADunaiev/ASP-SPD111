@@ -370,6 +370,10 @@ namespace ASP_SPD111.Controllers
         {
             return View();
         }
+        public ViewResult HomeWork5()
+        {
+            return View();
+        }
         public IActionResult Razor()
         {
             ViewData["formController"] = "Hello from Controller";
