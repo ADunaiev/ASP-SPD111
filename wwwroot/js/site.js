@@ -40,10 +40,7 @@ function authButtonClick() {
     fetch(`/api/auth?login=${login}&password=${password}`)
         .then(r => {
             if (r.status == 200) { // OK
-                window.location.reload();
-
-
-                    
+                window.location.reload();             
             }
             else {  // 401
                 showAuthMessage("Вхід відхилено");
@@ -52,10 +49,17 @@ function authButtonClick() {
 }
 
 function signOutButtonClick() {
-    return fetch(`/api/auth`, { method: 'delete' })
-        .then(r => r.json()
-        );
 
+    return fetch(`/api/auth`, { method: 'delete' })
+        .then(r => {
+            if (r.status == 200) {
+                window.location.href = `/home/index`;
+            }
+            else {
+                showAuthMessage("Виникли проблеми з сервером");
+            }
+        });
+    
 }
 
 function showAuthMessage(message) {

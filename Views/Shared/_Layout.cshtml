@@ -81,7 +81,9 @@
                             <img src="/Avatars/@(avatar)" class="rounded nav-avatar"/>
                         </a>
                         <button type="button" class="btn btn-outline-danger"
-                                id="auth-signout-button">
+                                
+                                data-bs-toggle="modal"
+                                data-bs-target="#signOutModal">
                             <i class="bi bi-box-arrow-right"></i>
                         </button>
                     }
@@ -114,7 +116,7 @@
 
 
 
-    <!-- Modal -->
+    <!-- Modal for authentification -->
     <div class="modal fade bd-example-modal-sm" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
                 <div class="modal-content">
@@ -168,6 +170,32 @@
             
                     </div>
                 </div>
+        </div>
+    </div>
+
+    <!-- Modal for sign out -->
+    <div class="modal fade bd-example-modal-sm" id="signOutModal" tabindex="-1" aria-labelledby="signOutModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-5" id="signOutModalLabel">Вихід з системи</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <p>
+                                Ви дійсно бажаєте вийти з системи?
+                            </p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="auth-signout-button" class="btn btn-outline-secondary">Так</button>
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal" aria-label="Close">Ні</button>
+                </div>
+            </div>
         </div>
     </div>
 

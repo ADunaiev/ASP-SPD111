@@ -2,6 +2,8 @@
 using ASP_SPD111.Services.Hash;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Principal;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ASP_SPD111.Controllers
 {
@@ -43,13 +45,16 @@ namespace ASP_SPD111.Controllers
         }
 
         [HttpDelete]
-        public RedirectToActionResult SignOutMethod() 
+        public object SignOutMethod() 
         {
 
-            HttpContext.Session.Clear();
+            if (HttpContext.User.Identity?.IsAuthenticated ?? false)
+            {
+                HttpContext.Session.Clear();
+                return new { status = "Вихід успішний" };
+            }
 
-            return RedirectToAction(nameof(Index));
-
+            return new { status = "Вихід неможливий" };
         }
     }
 }
