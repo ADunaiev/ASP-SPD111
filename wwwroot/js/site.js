@@ -16,6 +16,11 @@
     if (deleteProfileButton) {
         deleteProfileButton.addEventListener('click', deleteProfileButtonClick);
     } 
+
+    const softDeleteProfileButton = document.getElementById("profile-soft-delete-button");
+    if (softDeleteProfileButton) {
+        softDeleteProfileButton.addEventListener('click', softDeleteProfileButtonClick);
+    } 
     
    
 });
@@ -56,7 +61,7 @@ function signOutButtonClick() {
                 window.location.href = `/home/index`;
             }
             else {
-                showAuthMessage("Виникли проблеми з сервером");
+                showSignOutMessage("Виникли проблеми з сервером");
             }
         });
     
@@ -68,6 +73,29 @@ function showAuthMessage(message) {
 
     authMessage.innerText = message;
     authMessage.classList.remove("visually-hidden");
+}
+
+function showSignOutMessage(message) {
+    const signOutMessage = document.getElementById("sign-out-message");
+    if (!signOutMessage) throw "Element #sign-out-message not found";
+
+    signOutMessage.innerText = message;
+    signOutMessage.classList.remove("visually-hidden");
+}
+
+function showDeleteUserMessage(message) {
+    const deleteUserMessage = document.getElementById("delete-user-message");
+    if (!deleteUserMessage) throw "Element #delete-user-message not found";
+
+    deleteUserMessage.innerText = message;
+    deleteUserMessage.classList.remove("visually-hidden");
+}
+function showSoftDeleteUserMessage(message) {
+    const softDeleteUserMessage = document.getElementById("soft-delete-user-message");
+    if (!softDeleteUserMessage) throw "Element #soft-delete-user-message not found";
+
+    softDeleteUserMessage.innerText = message;
+    softDeleteUserMessage.classList.remove("visually-hidden");
 }
 
 function saveProfileButtonClick() {
@@ -95,9 +123,29 @@ function deleteProfileButtonClick() {
         {
             method: 'DELETE'
         })
-        .then(r => r.json())
-        .then(j => {
-            console.log(j);
+        .then(r => {
+            if (r.status == 200) {
+                window.location.href = `/home/index`;
+            }
+            else {
+                showDeleteUserMessage("Виникли проблеми з сервером");
+            }
         });
         
+}
+
+function softDeleteProfileButtonClick() {
+    fetch(`/user/SoftDeleteProfile`,
+        {
+            method: 'DELETE'
+        })
+        .then(r => {
+            if (r.status == 200) {
+                window.location.href = `/home/index`;
+            }
+            else {
+                showSoftDeleteUserMessage("Виникли проблеми з сервером");
+            }
+        });
+
 }

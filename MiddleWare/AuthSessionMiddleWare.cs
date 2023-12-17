@@ -29,8 +29,8 @@ namespace ASP_SPD111.MiddleWare
                 var user = _dataContext
                     .Users
                     .Find(Guid.Parse(context.Session.GetString("AuthUserId")!));
-
-                if(user != null)
+                // додаємо перевірку на м'яке видалення
+                if(user != null && user.DeleteDt == null)
                 {
                     // перекладаємо відомості про користувача до контексту
                     // Http у формалізмі Claims

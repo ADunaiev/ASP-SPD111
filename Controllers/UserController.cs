@@ -123,11 +123,38 @@ namespace ASP_SPD111.Controllers
 			user.PasswordSalt = "";
 			user.PasswordDk = "";
 
-			await _dataContext.SaveChangesAsync();
+            if (HttpContext.User.Identity?.IsAuthenticated ?? false)
+            {
+                HttpContext.Session.Clear();
+            }
+
+            await _dataContext.SaveChangesAsync();
 
 			return Json(new { status = 200 });
 		}
+		[HttpDelete]
+		public async Task<JsonResult> SoftDeleteProfile()
+		{
+            var user = this.GetAuthUser();
 
+            if (user == null)
+            {
+                return Json(new { status = 401 });
+            }
+
+            // _dataContext.Users.Remove(user); повне видалення порушення зв'язків даних
+            user.DeleteDt = DateTime.Now; // встановлюємо ознаку видалення
+                                          // за вимогами законодаства видаляємо персональні дані
+
+            if (HttpContext.User.Identity?.IsAuthenticated ?? false)
+            {
+                HttpContext.Session.Clear();
+            }
+
+            await _dataContext.SaveChangesAsync();
+
+            return Json(new { status = 200 });
+        }
 		private Data.Entities.User? GetAuthUser()
 		{
 			if (HttpContext.User.Identity?.IsAuthenticated ?? false)

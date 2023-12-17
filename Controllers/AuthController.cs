@@ -38,6 +38,12 @@ namespace ASP_SPD111.Controllers
                 HttpContext.Response.StatusCode= StatusCodes.Status401Unauthorized;
                 return new { status = "Credentials rejected" };
             }
+            // перевіряємо м'яке видалення
+            if (user.DeleteDt != null)
+            {
+                HttpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                return new { status = "Credentials rejected" };
+            }
             // зберігаємо у сесії факт успішної автентифікації
             HttpContext.Session.SetString("AuthUserId", user.Id.ToString());
 

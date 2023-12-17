@@ -55,7 +55,16 @@ else
                                 @if(Model.IsPersonal)
                                 {
                                     <button class="btn btn-outline-primary" id="profile-save-button">Зберігти</button>
-                                    <button class="btn btn-outline-danger" id="profile-delete-button">Видалити</button>
+                                    <button class="btn btn-outline-danger"                      
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#deleteUserModal">
+                                            Видалити 
+                                    </button>
+                                    <button class="btn btn-outline-warning"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#softDeleteUserModal">
+                                        М'яко видалити
+                                    </button>
                                 }                            
                             </div>
                         </div>
@@ -63,4 +72,64 @@ else
                 </div>
             </div>
         </div>
+
+    <!-- Modal for User deletion -->
+    <div class="modal fade bd-example-modal-sm" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-5" id="deleteUserModalLabel">Видалення даних користувача</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <p>
+                                Ви дійсно бажаєте видалити дані користувача з системи? Ця операція незворотня!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="profile-delete-button" class="btn btn-outline-secondary">Так</button>
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal" aria-label="Close">Ні</button>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div id="delete-user-message" class="alert alert-danger visually-hidden w-100" role="alert"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for User soft deletion -->
+    <div class="modal fade bd-example-modal-sm" id="softDeleteUserModal" tabindex="-1" aria-labelledby="softDeleteUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-5" id="softDeleteUserModalLabel">М'ке видалення даних користувача. Ваші дані будуть збережені у системі.</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <p>
+                                Ви дійсно бажаєте припинити дію аккаунта в системі? Ця операція зворотня!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="profile-soft-delete-button" class="btn btn-outline-secondary">Так</button>
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal" aria-label="Close">Ні</button>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div id="soft-delete-user-message" class="alert alert-danger visually-hidden w-100" role="alert"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 }
